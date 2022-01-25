@@ -32,16 +32,17 @@ RUN wget --no-check-certificate https://github.com/mayswind/AriaNg/releases/down
     && rm ariang.zip \
     && chmod -R 755 ./
 
-WORKDIR /aria2
+WORKDIR /app
 
-COPY aria2.conf ./conf-copy/aria2.conf
-COPY start.sh ./
+COPY aria2.conf /docker-aria2.conf
+COPY start.sh /app/
 COPY Caddyfile /usr/local/caddy/
 
-VOLUME /aria2/data
-VOLUME /aria2/conf
+VOLUME /downloads
+VOLUME /config
 
 EXPOSE 8080
 
 ENTRYPOINT ["/bin/sh"]
+
 CMD ["./start.sh"]
