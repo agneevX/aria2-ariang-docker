@@ -25,7 +25,7 @@ RUN apk update \
 
 # AriaNG
 RUN mkdir /usr/local/www/ariang \
-    && cd usr/local/www/ariang \
+    && cd /usr/local/www/ariang \
     && wget --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip \
     -O ariang.zip \
     && unzip ariang.zip \
@@ -44,5 +44,4 @@ WORKDIR /config
 EXPOSE 8080
 
 ENTRYPOINT ["/bin/sh"]
-
 CMD ["/app/start.sh"]
