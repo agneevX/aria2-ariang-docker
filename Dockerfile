@@ -24,15 +24,13 @@ RUN apk update \
     && apk add --no-cache --update caddy aria2 su-exec
 
 # AriaNG
-WORKDIR /usr/local/www/ariang
-
-RUN wget --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip \
+RUN mkdir /usr/local/www/ariang \
+    && cd usr/local/www/ariang \
+    && wget --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip \
     -O ariang.zip \
     && unzip ariang.zip \
     && rm ariang.zip \
     && chmod -R 755 ./
-
-WORKDIR /app
 
 COPY aria2.conf /docker-aria2.conf
 COPY start.sh /app/
@@ -41,8 +39,10 @@ COPY Caddyfile /usr/local/caddy/
 VOLUME /downloads
 VOLUME /config
 
+WORKDIR /config
+
 EXPOSE 8080
 
 ENTRYPOINT ["/bin/sh"]
 
-CMD ["./start.sh"]
+CMD ["/app/start.sh"]
