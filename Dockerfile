@@ -33,7 +33,7 @@ RUN mkdir /usr/local/www/ariang \
     && chmod -R 755 ./
 
 COPY aria2.conf /docker-aria2.conf
-COPY start.sh /app/
+COPY start.sh /start
 COPY Caddyfile /usr/local/caddy/
 
 VOLUME /downloads
@@ -44,4 +44,4 @@ WORKDIR /config
 EXPOSE 8080
 
 ENTRYPOINT ["/bin/sh"]
-CMD ["/app/start.sh"]
+CMD ["/start"]
