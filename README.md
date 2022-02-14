@@ -61,8 +61,8 @@ To run as a different user and to map custom volume locations use:
 docker run -d \
     --name aria2-ui \
     -p 8080:8080 \
-    -v /DOWNLOAD_DIR:/downloads \
-    -v /CONFIG_DIR:/config \
+    -v ./aria2:/downloads \
+    -v ./aria2-conf:/config \
     -e PUID=1000 \
     -e PGID=1000 \
     -e ARIA2RPCPORT=443 \
@@ -84,8 +84,8 @@ services:
     ports:
       - 443:8080
     volumes:
-      - /DOWNLOAD_DIR:/downloads
-      - /CONFIG_DIR:/config
+      - ./aria2:/downloads
+      - ./aria2-conf:/config
     environment:
       - PUID=1000
       - PGID=1000
